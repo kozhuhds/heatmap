@@ -2,4 +2,5 @@
 
 
 module.exports = angular.module('app.charts', [])
-    .controller('ChartsCtrl', require('./ChartsCtrl'));
+    .controller('ChartsCtrl', require('./ChartsCtrl'))
+    .factory('chartService', require('./chartService'));

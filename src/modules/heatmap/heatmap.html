@@ -1,10 +1,26 @@
 <div class="heatmap">
-    <h2 class="heatmap__headline">Incidents</h2>
+    <h2 class="heatmap__headline">{{title}}</h2>
     <div class="heatmap__body">
-        <div class="heatmap__body__line">
-            <div class="heatmap__body__line__axis-y"></div>
-            <div class="heatmap__body__line__chart"></div>
+        <div class="heatmap__body__axis-y">
+            <div class="heatmap__body__axis-y__item"
+                 ng-repeat="itemY in axisValuesY">
+                    {{itemY}}
+            </div>
         </div>
-        <div class="heatmap__body__line__axis-x"></div>
+        <div class="heatmap__body__map">
+            <div class="heatmap__body__map__line" ng-repeat="line in chartData">
+                <div class="heatmap__body__map__line__item"
+                     ng-repeat="item in line"
+                     ng-style="{{item.color}}">
+                    <!--{{item.data ? item.data.value : ''}}-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="heatmap__axis-x">
+        <div class="heatmap__axis-x__item"
+             ng-repeat="itemX in axisValuesX">
+            {{itemX}}
+        </div>
     </div>
 </div>

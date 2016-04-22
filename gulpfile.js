@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     less = require('gulp-less');
 
-gulp.task('build', ['move', 'less'], function () {
+gulp.task('build', ['less', 'move'], function () {
     browserify({
         entries: './src/app.js',
         extensions: ['.js'],
@@ -21,13 +21,15 @@ gulp.task('clean', function(){
         .pipe(clean());
 });
 
-gulp.task('move',['clean'], function(){
+gulp.task('move', function(){
     gulp.src(['src/index.html'])
         .pipe(gulp.dest('dist'));
 
     gulp.src(['src/modules/**/*.html'])
         .pipe(gulp.dest('dist/templates/modules'));
 
+    gulp.src(['./data/**/*.json'])
+        .pipe(gulp.dest('./dist/data'));
 });
 
 gulp.task('webserver', function() {
@@ -46,5 +48,5 @@ gulp.task('less', function () {
 });
 
 gulp.task('serve', ['build', 'webserver'], function () {
-    gulp.watch(['./src/**/*.js', './src/**/*.less'], ['build']);
+    gulp.watch(['./src/**/*.js', './src/**/*.less', './src/**/*.html'], ['build']);
 });
