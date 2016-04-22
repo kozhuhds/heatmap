@@ -71,8 +71,8 @@ module.exports = function ($scope) {
             };
         });
 
-        axisRangeX = $scope.axisX === 'dowId' ? Object.keys(axisValuesX).length + 1 : Object.keys(axisValuesX).length;
-        axisRangeY = $scope.axisY === 'dowId' ? Object.keys(axisValuesY).length + 1 : Object.keys(axisValuesY).length;
+        axisRangeX = $scope.axisX === 'dowId' ? 8 : 24;
+        axisRangeY = $scope.axisY === 'dowId' ? 8 : 24;
 
         // add missed days and hours
         for (var i = $scope.axisY === 'dowId' ? 1 : 0; i < axisRangeY; i++) {
