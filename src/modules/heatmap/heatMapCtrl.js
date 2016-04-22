@@ -81,7 +81,6 @@ module.exports = function ($scope) {
         $scope.chartData = chartData;
         $scope.axisValuesX = axisValuesX;
         $scope.axisValuesY = axisValuesY;
-        debugger;
     });
 
 };

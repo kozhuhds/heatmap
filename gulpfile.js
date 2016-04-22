@@ -3,9 +3,16 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     webserver = require('gulp-webserver'),
     clean = require('gulp-clean'),
-    less = require('gulp-less');
+    less = require('gulp-less'),
+    run = require('run-sequence');
 
-gulp.task('build', ['less', 'move'], function () {
+gulp.task('build', function (cb) {
+    run('less', 'move', 'js', cb);
+
+
+});
+
+gulp.task('js', function(){
     browserify({
         entries: './src/app.js',
         extensions: ['.js'],
@@ -47,6 +54,7 @@ gulp.task('less', function () {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('serve', ['build', 'webserver'], function () {
+gulp.task('serve', function (cb) {
+    run('build', 'webserver', cb);
     gulp.watch(['./src/**/*.js', './src/**/*.less', './src/**/*.html'], ['build']);
 });
