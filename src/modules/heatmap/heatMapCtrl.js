@@ -1,5 +1,6 @@
 module.exports = function ($scope) {
-    var maxValue = 0;
+    var maxValue = 0,
+        minValue = Infinity;
     var axisValueToString = {
         dowId: function (value) {
             var days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -14,7 +15,13 @@ module.exports = function ($scope) {
     };
 
     var generateColor = function (value) {
-        value = parseInt(parseInt(value) / maxValue * 100);
+        value = parseInt(value);
+
+        var oldRange = maxValue - minValue,
+            newRange = 100;
+
+        value = (((value - minValue) * newRange) / oldRange);
+
         var r = Math.floor((255 * value) / 100),
             g = Math.floor((255 * (100 - value)) / 100),
             b = 0;
@@ -41,6 +48,9 @@ module.exports = function ($scope) {
         mapData.forEach(function (dayItem) {
             if(maxValue < dayItem.data[$scope.entryDataField][0].value) {
                 maxValue = dayItem.data[$scope.entryDataField][0].value
+            }
+            if(minValue > dayItem.data[$scope.entryDataField][0].value) {
+                minValue = dayItem.data[$scope.entryDataField][0].value
             }
         });
 
