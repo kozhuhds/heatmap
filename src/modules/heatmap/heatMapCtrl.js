@@ -1,6 +1,8 @@
 module.exports = function ($scope) {
     var maxValue = 0,
         minValue = Infinity;
+
+
     var axisValueToString = {
         dowId: function (value) {
             var days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -46,11 +48,13 @@ module.exports = function ($scope) {
 
         //find max value
         mapData.forEach(function (dayItem) {
-            if(maxValue < dayItem.data[$scope.entryDataField][0].value) {
-                maxValue = dayItem.data[$scope.entryDataField][0].value
+            var value = dayItem.data[$scope.entryDataField][0].value;
+
+            if(maxValue < value) {
+                maxValue = value;
             }
-            if(minValue > dayItem.data[$scope.entryDataField][0].value) {
-                minValue = dayItem.data[$scope.entryDataField][0].value
+            if(minValue > value) {
+                minValue = value;
             }
         });
 
