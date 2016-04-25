@@ -1,16 +1,20 @@
 <div>
     <heat-map
             entry-data-field="Site Incident Heat Severity Map (lv12)"
-            axis-x="hourId"
-            axis-y="dowId"
+            axis-x="hour"
+            axis-y="day"
+            day-field="dowId"
+            hour-field="hourId"
             map-data="chartService.mapData"
             title="Incidents2"
             ></heat-map>
     <heat-map
             entry-data-field="Site Incident Heat Severity Map (lv12)"
-            axis-x="dowId"
-            axis-y="hourId"
-            map-data="chartService.mapData"
+            axis-x="day"
+            axis-y="hour"
+            day-field="dow"
+            hour-field="hour"
+            map-data="chartService.otherData"
             title="Incidents1"
             ></heat-map>
 </div>

@@ -4,11 +4,11 @@ module.exports = function ($scope) {
 
 
     var axisValueToString = {
-        dowId: function (value) {
+        day: function (value) {
             var days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
             return days[value - 1] || value;
         },
-        hourId: function (value) {
+        hour: function (value) {
             if(value + 1 === 12) {
                 return "12p"
             }
@@ -36,6 +36,9 @@ module.exports = function ($scope) {
 
 
     $scope.$watch('mapData', function (mapData) {
+        var axisXfieldName = $scope.axisX === 'day' ? $scope.dayField : $scope.hourField,
+            axisYfieldName = $scope.axisY === 'day' ? $scope.dayField : $scope.hourField;
+
         if(!mapData) {
           return
         }
@@ -60,8 +63,8 @@ module.exports = function ($scope) {
 
         //normalize data for rendering
         mapData.forEach(function (dayItem) {
-            var axisValueX = dayItem.index[$scope.axisX],
-                axisValueY = dayItem.index[$scope.axisY];
+            var axisValueX = dayItem.index[axisXfieldName],
+                axisValueY = dayItem.index[axisYfieldName];
 
             chartData[axisValueY] = chartData[axisValueY] || {};
 
@@ -75,15 +78,15 @@ module.exports = function ($scope) {
             };
         });
 
-        axisRangeX = $scope.axisX === 'dowId' ? 8 : 24;
-        axisRangeY = $scope.axisY === 'dowId' ? 8 : 24;
+        axisRangeX = $scope.axisX === 'day' ? 8 : 24;
+        axisRangeY = $scope.axisY === 'day' ? 8 : 24;
 
         // add missed days and hours
-        for (var i = $scope.axisY === 'dowId' ? 1 : 0; i < axisRangeY; i++) {
+        for (var i = $scope.axisY === 'day' ? 1 : 0; i < axisRangeY; i++) {
             if(!chartData[i]) {
                 chartData[i] = {};
             }
-            for(var j = $scope.axisX === 'dowId' ? 1 : 0; j < axisRangeX; j++) {
+            for(var j = $scope.axisX === 'day' ? 1 : 0; j < axisRangeX; j++) {
                 if(!chartData[i][j]) {
                     chartData[i][j] = {
                         color: {'background-color': '#127580'}
